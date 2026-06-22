@@ -1,0 +1,42 @@
+server:
+  port: ${PORT:8084}
+
+spring:
+  application:
+    name: recommendation-service
+
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+analytics:
+  service:
+    url: ${ANALYTICS_SERVICE_URL:http://localhost:8083}
+
+groq:
+  api:
+    key: ${GROQ_API_KEY}
+    url: ${GROQ_API_URL:https://api.groq.com/openai/v1/chat/completions}
+
+cache:
+  recommendation:
+    ttl: ${CACHE_TTL:5}
+
+logging:
+  level:
+    root: INFO
+    com.example.recommendation: DEBUG
